@@ -283,99 +283,45 @@ const Index = () => {
 
       <section id="contact" className="py-24 bg-secondary/30">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Свяжитесь с нами</h2>
-            <p className="text-xl text-muted-foreground">
-              Мы всегда рады вашим вопросам и предложениям
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            <Card className="p-8 animate-scale-in">
-              <h3 className="text-2xl font-heading font-bold text-primary mb-6 text-center">Форма обратной связи</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-bold mb-2">Имя</label>
-                  <Input 
-                    placeholder="Ваше имя"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2">Email</label>
-                  <Input 
-                    type="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2">Сообщение</label>
-                  <Textarea 
-                    placeholder="Ваше сообщение..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    rows={4}
-                    required
-                  />
-                </div>
-                <Button 
-                  type="submit"
-                  className="w-full bg-primary hover:bg-red-700 text-white font-bold text-lg py-6"
-                >
-                  Отправить
-                </Button>
-              </form>
-            </Card>
-
-            <Card className="p-8 animate-scale-in" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-2xl font-heading font-bold text-primary mb-6 text-center">Контактная информация</h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <Icon name="MapPin" size={24} className="text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold mb-1">Адрес</h4>
-                    <p className="text-muted-foreground">The Coca-Cola Company<br/>One Coca-Cola Plaza<br/>Atlanta, GA 30313, USA</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Icon name="Phone" size={24} className="text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold mb-1">Телефон</h4>
-                    <p className="text-muted-foreground">+1 (800) GET-COKE</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Icon name="Mail" size={24} className="text-primary mt-1" />
-                  <div>
-                    <h4 className="font-bold mb-1">Email</h4>
-                    <p className="text-muted-foreground">info@coca-cola.com</p>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-center">Социальные сети</h4>
-                  <div className="flex gap-4 justify-center">
-                    <a href="#" className="hover:scale-110 transition-transform">
-                      <Icon name="Facebook" size={32} className="text-primary" />
-                    </a>
-                    <a href="#" className="hover:scale-110 transition-transform">
-                      <Icon name="Instagram" size={32} className="text-primary" />
-                    </a>
-                    <a href="#" className="hover:scale-110 transition-transform">
-                      <Icon name="Twitter" size={32} className="text-primary" />
-                    </a>
-                    <a href="#" className="hover:scale-110 transition-transform">
-                      <Icon name="Youtube" size={32} className="text-primary" />
-                    </a>
-                  </div>
-                </div>
+          <Card className="p-8 animate-scale-in">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-bold mb-2">Имя</label>
+                <Input 
+                  placeholder="Ваше имя"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  required
+                />
               </div>
-            </Card>
-          </div>
+              <div>
+                <label className="block text-sm font-bold mb-2">Email</label>
+                <Input 
+                  type="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-bold mb-2">Сообщение</label>
+                <Textarea 
+                  placeholder="Ваше сообщение..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  rows={4}
+                  required
+                />
+              </div>
+              <Button 
+                type="submit"
+                className="w-full bg-primary hover:bg-red-700 text-white font-bold text-lg py-6"
+              >
+                Отправить
+              </Button>
+            </form>
+          </Card>
         </div>
       </section>
 
