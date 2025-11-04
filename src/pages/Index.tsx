@@ -2,57 +2,101 @@ import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState('Все');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const products = [
     {
       name: 'Coca-Cola Classic',
+      category: 'Классика',
       description: 'Оригинальный легендарный вкус с 1886 года',
       image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/1949b602-3e30-4bbe-a276-5f8d60280acf.jpg'
     },
     {
       name: 'Cherry Coke',
+      category: 'Вкусы',
       description: 'Классика со вкусом спелой вишни',
       image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/c0064332-2400-48f4-bb8b-95303e6b5933.jpg'
     },
     {
       name: 'Vanilla Coke',
+      category: 'Вкусы',
       description: 'Нежный ванильный аромат и классика',
       image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/1949b602-3e30-4bbe-a276-5f8d60280acf.jpg'
     },
     {
       name: 'Diet Coke',
+      category: 'Без сахара',
       description: 'Без сахара, но со вкусом',
+      image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/c0064332-2400-48f4-bb8b-95303e6b5933.jpg'
+    },
+    {
+      name: 'Coca-Cola Zero',
+      category: 'Без сахара',
+      description: 'Вкус оригинала, ноль калорий',
+      image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/1949b602-3e30-4bbe-a276-5f8d60280acf.jpg'
+    },
+    {
+      name: 'Coca-Cola Energy',
+      category: 'Энергия',
+      description: 'Энергия и вкус в одной банке',
       image: 'https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/c0064332-2400-48f4-bb8b-95303e6b5933.jpg'
     }
   ];
 
-  const timeline = [
-    { year: '1886', event: 'Рождение легенды', description: 'Джон Пембертон создал формулу Coca-Cola в Атланте' },
-    { year: '1915', event: 'Культовая бутылка', description: 'Создана узнаваемая контурная бутылка' },
-    { year: '1931', event: 'Санта-Клаус', description: 'Coca-Cola создала образ современного Санты' },
-    { year: '1971', event: '"I\'d Like to Buy the World a Coke"', description: 'Легендарная рекламная кампания единства' },
-    { year: '2025', event: 'Taste the Feeling', description: 'Продолжаем создавать моменты радости по всему миру' }
+  const news = [
+    {
+      title: 'Новая летняя кампания 2025',
+      date: '15 мая 2025',
+      description: 'Запускаем масштабную летнюю кампанию с призами и подарками',
+      icon: 'Sparkles'
+    },
+    {
+      title: 'Экологичная упаковка',
+      date: '3 апреля 2025',
+      description: 'Переход на 100% перерабатываемую упаковку во всех странах',
+      icon: 'Leaf'
+    },
+    {
+      title: 'Партнерство с Olympics 2028',
+      date: '20 марта 2025',
+      description: 'Coca-Cola стала официальным партнером Олимпиады 2028',
+      icon: 'Trophy'
+    }
   ];
 
+  const categories = ['Все', 'Классика', 'Вкусы', 'Без сахара', 'Энергия'];
+
+  const filteredProducts = selectedCategory === 'Все' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
+
   const scrollToSection = (id: string) => {
-    setActiveSection(id);
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <div className="min-h-screen bg-white">
       <nav className="fixed top-0 w-full bg-primary text-white shadow-lg z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-3xl font-heading font-bold tracking-wider">Coca-Cola</h1>
+          <h1 className="text-3xl font-heading font-bold tracking-wider cursor-pointer" onClick={() => scrollToSection('home')}>Coca-Cola</h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection('home')} className="hover:text-secondary transition-colors font-medium">Главная</button>
-            <button onClick={() => scrollToSection('history')} className="hover:text-secondary transition-colors font-medium">История</button>
+            <button onClick={() => scrollToSection('about')} className="hover:text-secondary transition-colors font-medium">О бренде</button>
             <button onClick={() => scrollToSection('products')} className="hover:text-secondary transition-colors font-medium">Продукция</button>
-            <button onClick={() => scrollToSection('moments')} className="hover:text-secondary transition-colors font-medium">Моменты</button>
+            <button onClick={() => scrollToSection('news')} className="hover:text-secondary transition-colors font-medium">Новости</button>
+            <button onClick={() => scrollToSection('contact')} className="hover:text-secondary transition-colors font-medium">Контакты</button>
           </div>
         </div>
       </nav>
@@ -71,13 +115,13 @@ const Index = () => {
             <p className="text-xl md:text-2xl mb-8 text-white/90 font-light">
               Более 130 лет создаем моменты радости и освежения по всему миру
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-secondary hover:text-foreground font-bold text-lg px-8 py-6 transition-all hover:scale-105"
-                onClick={() => scrollToSection('history')}
+                onClick={() => scrollToSection('about')}
               >
-                Наша история
+                Узнать больше
               </Button>
               <Button 
                 size="lg" 
@@ -85,7 +129,7 @@ const Index = () => {
                 className="border-2 border-white text-white hover:bg-white hover:text-primary font-bold text-lg px-8 py-6 transition-all hover:scale-105"
                 onClick={() => scrollToSection('products')}
               >
-                Продукты
+                Наши продукты
               </Button>
             </div>
           </div>
@@ -100,40 +144,50 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="history" className="py-24 bg-secondary/30">
+      <section id="about" className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Наша история</h2>
+            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">О бренде</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Путешествие длиной в столетие. От аптеки в Атланте до глобального символа радости
+              История легенды, которая объединяет мир
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            {timeline.map((item, index) => (
-              <div 
-                key={index} 
-                className="relative pl-8 pb-12 border-l-4 border-primary last:border-0 animate-fade-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="absolute -left-4 top-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full"></div>
-                </div>
-                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                  <h3 className="text-4xl font-heading font-bold text-primary mb-2">{item.year}</h3>
-                  <h4 className="text-2xl font-bold mb-2">{item.event}</h4>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </div>
-              </div>
-            ))}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <Card className="text-center p-8 hover:shadow-xl transition-shadow animate-scale-in">
+              <Icon name="Globe" size={64} className="mx-auto mb-4 text-primary" />
+              <h3 className="text-3xl font-heading font-bold mb-2">200+</h3>
+              <p className="text-muted-foreground">стран присутствия</p>
+            </Card>
+            <Card className="text-center p-8 hover:shadow-xl transition-shadow animate-scale-in" style={{ animationDelay: '0.1s' }}>
+              <Icon name="Users" size={64} className="mx-auto mb-4 text-primary" />
+              <h3 className="text-3xl font-heading font-bold mb-2">1.9 млрд</h3>
+              <p className="text-muted-foreground">порций ежедневно</p>
+            </Card>
+            <Card className="text-center p-8 hover:shadow-xl transition-shadow animate-scale-in" style={{ animationDelay: '0.2s' }}>
+              <Icon name="Calendar" size={64} className="mx-auto mb-4 text-primary" />
+              <h3 className="text-3xl font-heading font-bold mb-2">138 лет</h3>
+              <p className="text-muted-foreground">истории бренда</p>
+            </Card>
           </div>
 
-          <div className="mt-16 text-center">
-            <img 
-              src="https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/2f65f15e-58b5-40ea-9aca-f65fd25534ad.jpg" 
-              alt="Vintage Coca-Cola" 
-              className="max-w-3xl w-full mx-auto rounded-xl shadow-2xl"
-            />
+          <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-3xl font-heading font-bold text-primary mb-4">Наша миссия</h3>
+                <p className="text-muted-foreground mb-4">
+                  Освежать мир. Вдохновлять моменты оптимизма и счастья. Создавать ценность и менять мир к лучшему.
+                </p>
+                <p className="text-muted-foreground">
+                  С 1886 года Coca-Cola объединяет людей по всему миру, создавая моменты радости и празднуя особенные события жизни.
+                </p>
+              </div>
+              <img 
+                src="https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/2f65f15e-58b5-40ea-9aca-f65fd25534ad.jpg" 
+                alt="Coca-Cola Heritage" 
+                className="rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -141,14 +195,27 @@ const Index = () => {
       <section id="products" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Наши вкусы</h2>
+            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Наша продукция</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Классика и инновации. Найди свой идеальный момент освежения
+              Найди свой идеальный вкус для каждого момента
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product, index) => (
+          <div className="flex justify-center gap-4 mb-12 flex-wrap">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                variant={selectedCategory === category ? 'default' : 'outline'}
+                className={`font-bold ${selectedCategory === category ? 'bg-primary text-white' : 'border-primary text-primary hover:bg-primary hover:text-white'}`}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product, index) => (
               <Card 
                 key={index} 
                 className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary animate-scale-in overflow-hidden"
@@ -162,6 +229,11 @@ const Index = () => {
                   />
                 </div>
                 <CardContent className="p-6">
+                  <div className="mb-2">
+                    <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">
+                      {product.category}
+                    </span>
+                  </div>
                   <h3 className="text-2xl font-heading font-bold text-primary mb-2 group-hover:text-red-700 transition-colors">
                     {product.name}
                   </h3>
@@ -170,7 +242,7 @@ const Index = () => {
                     variant="outline" 
                     className="w-full border-primary text-primary hover:bg-primary hover:text-white font-bold"
                   >
-                    Узнать больше
+                    Подробнее
                   </Button>
                 </CardContent>
               </Card>
@@ -179,50 +251,134 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="moments" className="py-24 bg-gradient-to-br from-primary to-red-700 text-white">
+      <section id="news" className="py-24 bg-gradient-to-br from-primary to-red-700 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-heading font-bold mb-4">Моменты Coca-Cola</h2>
+            <h2 className="text-5xl md:text-6xl font-heading font-bold mb-4">Новости и события</h2>
             <p className="text-xl max-w-2xl mx-auto opacity-90">
-              Каждый глоток — это момент счастья, разделенный с миллионами людей по всему миру
+              Следите за последними новостями и акциями Coca-Cola
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all animate-fade-in">
-              <CardContent className="p-8 text-center">
-                <Icon name="Users" size={48} className="mx-auto mb-4 text-secondary" />
-                <h3 className="text-2xl font-heading font-bold mb-2">С друзьями</h3>
-                <p className="text-white/80">Лучшие моменты всегда с теми, кто рядом</p>
-              </CardContent>
-            </Card>
+            {news.map((item, index) => (
+              <Card 
+                key={index}
+                className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all animate-fade-in hover:scale-105 duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-8">
+                  <Icon name={item.icon as any} size={48} className="mb-4 text-secondary" />
+                  <p className="text-sm text-secondary mb-2">{item.date}</p>
+                  <h3 className="text-2xl font-heading font-bold mb-3">{item.title}</h3>
+                  <p className="text-white/80 mb-4">{item.description}</p>
+                  <Button 
+                    variant="outline" 
+                    className="border-white text-white hover:bg-white hover:text-primary font-bold"
+                  >
+                    Читать далее
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <CardContent className="p-8 text-center">
-                <Icon name="PartyPopper" size={48} className="mx-auto mb-4 text-secondary" />
-                <h3 className="text-2xl font-heading font-bold mb-2">На празднике</h3>
-                <p className="text-white/80">Делаем каждое событие особенным</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <CardContent className="p-8 text-center">
-                <Icon name="Heart" size={48} className="mx-auto mb-4 text-secondary" />
-                <h3 className="text-2xl font-heading font-bold mb-2">Каждый день</h3>
-                <p className="text-white/80">Маленькие радости в обычных моментах</p>
-              </CardContent>
-            </Card>
+      <section id="contact" className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Свяжитесь с нами</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Мы всегда рады вашим вопросам и предложениям
+            </p>
           </div>
 
-          <div className="mt-16 text-center">
-            <h3 className="text-3xl font-heading font-bold mb-6">Поделитесь своим моментом</h3>
-            <Button 
-              size="lg" 
-              className="bg-white text-primary hover:bg-secondary hover:text-foreground font-bold text-lg px-8 py-6 transition-all hover:scale-105"
-            >
-              <Icon name="Camera" size={24} className="mr-2" />
-              Загрузить фото
-            </Button>
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <Card className="p-8 animate-scale-in">
+              <h3 className="text-2xl font-heading font-bold text-primary mb-6">Форма обратной связи</h3>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-bold mb-2">Имя</label>
+                  <Input 
+                    placeholder="Ваше имя"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-2">Email</label>
+                  <Input 
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold mb-2">Сообщение</label>
+                  <Textarea 
+                    placeholder="Ваше сообщение..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    rows={4}
+                    required
+                  />
+                </div>
+                <Button 
+                  type="submit"
+                  className="w-full bg-primary hover:bg-red-700 text-white font-bold text-lg py-6"
+                >
+                  Отправить
+                </Button>
+              </form>
+            </Card>
+
+            <Card className="p-8 animate-scale-in" style={{ animationDelay: '0.1s' }}>
+              <h3 className="text-2xl font-heading font-bold text-primary mb-6">Контактная информация</h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <Icon name="MapPin" size={24} className="text-primary mt-1" />
+                  <div>
+                    <h4 className="font-bold mb-1">Адрес</h4>
+                    <p className="text-muted-foreground">The Coca-Cola Company<br/>One Coca-Cola Plaza<br/>Atlanta, GA 30313, USA</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Icon name="Phone" size={24} className="text-primary mt-1" />
+                  <div>
+                    <h4 className="font-bold mb-1">Телефон</h4>
+                    <p className="text-muted-foreground">+1 (800) GET-COKE</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Icon name="Mail" size={24} className="text-primary mt-1" />
+                  <div>
+                    <h4 className="font-bold mb-1">Email</h4>
+                    <p className="text-muted-foreground">info@coca-cola.com</p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-bold mb-3">Социальные сети</h4>
+                  <div className="flex gap-4">
+                    <a href="#" className="hover:scale-110 transition-transform">
+                      <Icon name="Facebook" size={32} className="text-primary" />
+                    </a>
+                    <a href="#" className="hover:scale-110 transition-transform">
+                      <Icon name="Instagram" size={32} className="text-primary" />
+                    </a>
+                    <a href="#" className="hover:scale-110 transition-transform">
+                      <Icon name="Twitter" size={32} className="text-primary" />
+                    </a>
+                    <a href="#" className="hover:scale-110 transition-transform">
+                      <Icon name="Youtube" size={32} className="text-primary" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -239,6 +395,7 @@ const Index = () => {
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-primary transition-colors">О нас</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Карьера</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Инвесторам</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Пресс-центр</a></li>
               </ul>
             </div>
@@ -248,24 +405,17 @@ const Index = () => {
                 <li><a href="#" className="hover:text-primary transition-colors">Все напитки</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Новинки</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Где купить</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Питательная ценность</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Следите за нами</h4>
-              <div className="flex gap-4">
-                <a href="#" className="hover:text-primary transition-colors">
-                  <Icon name="Facebook" size={24} />
-                </a>
-                <a href="#" className="hover:text-primary transition-colors">
-                  <Icon name="Instagram" size={24} />
-                </a>
-                <a href="#" className="hover:text-primary transition-colors">
-                  <Icon name="Twitter" size={24} />
-                </a>
-                <a href="#" className="hover:text-primary transition-colors">
-                  <Icon name="Youtube" size={24} />
-                </a>
-              </div>
+              <h4 className="font-bold mb-4">Поддержка</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-primary transition-colors">Контакты</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Политика конфиденциальности</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Условия использования</a></li>
+              </ul>
             </div>
           </div>
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
