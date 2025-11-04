@@ -103,11 +103,11 @@ const Index = () => {
 
       <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-red-600 to-red-700 text-white pt-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
         </div>
         
-        <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center relative z-10">
+        <div className="max-w-2xl mx-auto px-4 text-center relative z-10">
           <div className="animate-fade-up">
             <h2 className="text-6xl md:text-8xl font-heading font-bold mb-6 leading-tight">
               Taste the<br/>Feeling
@@ -115,7 +115,7 @@ const Index = () => {
             <p className="text-xl md:text-2xl mb-8 text-white/90 font-light">
               Более 130 лет создаем моменты радости и освежения по всему миру
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-4 flex-wrap justify-center mb-8">
               <Button 
                 size="lg" 
                 className="bg-white text-primary hover:bg-secondary hover:text-foreground font-bold text-lg px-8 py-6 transition-all hover:scale-105"
@@ -138,22 +138,22 @@ const Index = () => {
             <img 
               src="https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/1949b602-3e30-4bbe-a276-5f8d60280acf.jpg" 
               alt="Coca-Cola Bottle" 
-              className="max-w-md w-full drop-shadow-2xl"
+              className="max-w-sm w-full drop-shadow-2xl"
             />
           </div>
         </div>
       </section>
 
       <section id="about" className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">О бренде</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground">
               История легенды, которая объединяет мир
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="space-y-6 mb-16">
             <Card className="text-center p-8 hover:shadow-xl transition-shadow animate-scale-in">
               <Icon name="Globe" size={64} className="mx-auto mb-4 text-primary" />
               <h3 className="text-3xl font-heading font-bold mb-2">200+</h3>
@@ -171,37 +171,33 @@ const Index = () => {
             </Card>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-heading font-bold text-primary mb-4">Наша миссия</h3>
-                <p className="text-muted-foreground mb-4">
-                  Освежать мир. Вдохновлять моменты оптимизма и счастья. Создавать ценность и менять мир к лучшему.
-                </p>
-                <p className="text-muted-foreground">
-                  С 1886 года Coca-Cola объединяет людей по всему миру, создавая моменты радости и празднуя особенные события жизни.
-                </p>
-              </div>
-              <img 
-                src="https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/2f65f15e-58b5-40ea-9aca-f65fd25534ad.jpg" 
-                alt="Coca-Cola Heritage" 
-                className="rounded-lg shadow-lg"
-              />
-            </div>
+          <div className="bg-white p-8 rounded-xl shadow-lg space-y-6">
+            <h3 className="text-3xl font-heading font-bold text-primary text-center">Наша миссия</h3>
+            <p className="text-muted-foreground text-center">
+              Освежать мир. Вдохновлять моменты оптимизма и счастья. Создавать ценность и менять мир к лучшему.
+            </p>
+            <p className="text-muted-foreground text-center">
+              С 1886 года Coca-Cola объединяет людей по всему миру, создавая моменты радости и празднуя особенные события жизни.
+            </p>
+            <img 
+              src="https://cdn.poehali.dev/projects/e0ae8bc5-a1e7-414a-9e65-71b365254962/files/2f65f15e-58b5-40ea-9aca-f65fd25534ad.jpg" 
+              alt="Coca-Cola Heritage" 
+              className="rounded-lg shadow-lg w-full"
+            />
           </div>
         </div>
       </section>
 
       <section id="products" className="py-24 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Наша продукция</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground">
               Найди свой идеальный вкус для каждого момента
             </p>
           </div>
 
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
+          <div className="flex justify-center gap-3 mb-12 flex-wrap">
             {categories.map((category) => (
               <Button
                 key={category}
@@ -214,18 +210,18 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="space-y-6">
             {filteredProducts.map((product, index) => (
               <Card 
                 key={index} 
-                className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary animate-scale-in overflow-hidden"
+                className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary animate-scale-in overflow-hidden"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="overflow-hidden">
                   <img 
                     src={product.image} 
                     alt={product.name}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
                 <CardContent className="p-6">
@@ -252,15 +248,15 @@ const Index = () => {
       </section>
 
       <section id="news" className="py-24 bg-gradient-to-br from-primary to-red-700 text-white">
-        <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl md:text-6xl font-heading font-bold mb-4">Новости и события</h2>
-            <p className="text-xl max-w-2xl mx-auto opacity-90">
+            <p className="text-xl opacity-90">
               Следите за последними новостями и акциями Coca-Cola
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-6">
             {news.map((item, index) => (
               <Card 
                 key={index}
@@ -274,7 +270,7 @@ const Index = () => {
                   <p className="text-white/80 mb-4">{item.description}</p>
                   <Button 
                     variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-primary font-bold"
+                    className="w-full border-white text-white hover:bg-white hover:text-primary font-bold"
                   >
                     Читать далее
                   </Button>
@@ -286,17 +282,17 @@ const Index = () => {
       </section>
 
       <section id="contact" className="py-24 bg-secondary/30">
-        <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl md:text-6xl font-heading font-bold text-primary mb-4">Свяжитесь с нами</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground">
               Мы всегда рады вашим вопросам и предложениям
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+          <div className="space-y-8">
             <Card className="p-8 animate-scale-in">
-              <h3 className="text-2xl font-heading font-bold text-primary mb-6">Форма обратной связи</h3>
+              <h3 className="text-2xl font-heading font-bold text-primary mb-6 text-center">Форма обратной связи</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-bold mb-2">Имя</label>
@@ -337,7 +333,7 @@ const Index = () => {
             </Card>
 
             <Card className="p-8 animate-scale-in" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-2xl font-heading font-bold text-primary mb-6">Контактная информация</h3>
+              <h3 className="text-2xl font-heading font-bold text-primary mb-6 text-center">Контактная информация</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <Icon name="MapPin" size={24} className="text-primary mt-1" />
@@ -361,8 +357,8 @@ const Index = () => {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-bold mb-3">Социальные сети</h4>
-                  <div className="flex gap-4">
+                  <h4 className="font-bold mb-3 text-center">Социальные сети</h4>
+                  <div className="flex gap-4 justify-center">
                     <a href="#" className="hover:scale-110 transition-transform">
                       <Icon name="Facebook" size={32} className="text-primary" />
                     </a>
